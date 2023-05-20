@@ -24,7 +24,7 @@ class StackDriftDetector:
 
     def list_all_stacks(self):
         paginator = self.client.get_paginator('list_stacks')
-        for page in paginator.paginate():
+        for page in paginator.paginate(StackStatusFilter=['CREATE_COMPLETE','ROLLBACK_COMPLETE','UPDATE_COMPLETE','UPDATE_ROLLBACK_COMPLETE','IMPORT_COMPLETE','IMPORT_ROLLBACK_COMPLETE']):
             for stack in page['StackSummaries']:
                 yield stack
 
